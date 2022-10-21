@@ -1,7 +1,7 @@
 package dev.cruz.controllers;
 
 import com.google.gson.Gson;
-import dev.cruz.driver.Drive;
+
 import dev.cruz.entities.Employee;
 import io.javalin.http.Handler;
 
@@ -11,8 +11,8 @@ public class EmployeeController {
 
   public Handler createEmployee = (ctx) ->{
       String json = ctx.body();
-     Gson gson = new Gson();
+      Gson gson = new Gson();
       Employee employee = gson.fromJson(json, Employee.class);
+  };
 
-    }
 }

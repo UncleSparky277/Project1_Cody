@@ -1,5 +1,9 @@
 package dev.cruz.smoketests;
 
+import dev.cruz.util.ConnectionFactory;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

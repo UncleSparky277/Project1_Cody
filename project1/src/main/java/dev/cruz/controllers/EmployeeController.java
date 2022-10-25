@@ -15,7 +15,7 @@ public class EmployeeController {
       Employee employee = gson.fromJson(json, Employee.class);
       Employee registeredEmployee = Driver.employeeService.createEmployee(employee);
       String employeeJson = gson.toJson(registeredEmployee);
-      ctx.status(201); //This is a status code that will tell us how things went
+      ctx.status(202); //This is a status code that will tell us how things went
       ctx.result(employeeJson);
   };
 
@@ -48,10 +48,10 @@ public class EmployeeController {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean result = Driver.employeeService.deleteEmployeeById(id);
         if(result){
-            ctx.status(204);
+            ctx.status(202);
         }
         else{
-            ctx.status(400);
+            ctx.status(201);
             ctx.result("Could not process your delete request");
         }
   };

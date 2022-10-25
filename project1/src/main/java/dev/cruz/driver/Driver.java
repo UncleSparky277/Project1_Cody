@@ -1,7 +1,6 @@
 package dev.cruz.driver;
 
 import dev.cruz.controllers.EmployeeController;
-import dev.cruz.handlers.*;
 import dev.cruz.repositories.EmployeeDAO;
 import dev.cruz.repositories.EmployeeDAOLocal;
 import dev.cruz.repositories.EmployeeDAOPostgres;
@@ -16,15 +15,11 @@ public class Driver {
     public static void main(String[] args) {
         Javalin app = Javalin.create();
 
-        HelloHandler helloHandler = new HelloHandler();
-//        GetEmployeeByIdHandler getEmployeeByIdHandler = new GetEmployeeByIdHandler();
-//        CreateEmployeeHandler createEmployeeHandler = new CreateEmployeeHandler();
-//        UpdateEmployeeHandler updateEmployeeHandler = new UpdateEmployeeHandler();
-//        DeleteEmployeeHandler deleteEmployeeHandler = new DeleteEmployeeHandler();
+
         EmployeeController employeeController = new EmployeeController();
 
 
-        app.get("/hello", helloHandler);
+
 
         app.get("/employees/{id}", employeeController.getEmployeeByIdHandler);
 

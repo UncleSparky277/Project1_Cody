@@ -5,7 +5,7 @@ import dev.cruz.repositories.EmployeeDAO;
 
 import java.util.List;
 
-public class EmployeeServiceImpl {
+public class EmployeeServiceImpl implements EmployeeService {
     //EmployeeDAO is the parent class of EmployeeDAOLocal, so when making an object of any child of EmployeeDAO, you can have EmployeeDAO on the right
     // and then you specify the specific child you want on the left. This is JUST to save time in the future when changing to a different DAO
     //private EmployeeDAO employeeDAO = new EmployeeDAOLocal();
@@ -39,10 +39,10 @@ public class EmployeeServiceImpl {
     @Override
     public Employee getEmployeeById(int id) {
         //we COULD do this
-        // Employee employee = this.employeeDAO.getEmployeeById(id);
-        // return employee;
+         Employee employee = this.employeeDAO.getEmployeeById(id);
+         return employee;
         //  ^  v The upper 2 lines vs the lower 1 line do the same thing and are both valid
-        return this.employeeDAO.getEmployeeById(id);
+       // return this.employeeDAO.getEmployeeById(id);
     }
 
     public List<Employee> getAllEmployees() {

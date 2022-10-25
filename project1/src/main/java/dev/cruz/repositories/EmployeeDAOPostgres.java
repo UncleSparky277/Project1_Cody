@@ -99,7 +99,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
     @Override
     public Employee updateEmployee(Employee employee) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "update employees set firstName = ?, lastName = ?, address = ? where id = ?";
+            String sql = "Update employees set firstName = ?, lastName = ?, address = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, employee.getFirstName());

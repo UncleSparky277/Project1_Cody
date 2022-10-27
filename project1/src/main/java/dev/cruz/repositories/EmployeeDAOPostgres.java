@@ -17,7 +17,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             // Here is the unfun thing about JDBC, you have to write SQL statements in Java
             // I recommend putting in comments the SQL command you are trying to execute
             //INSERT INTO employees VALUES (DEFAULT, 'Great Gatsby', 'F. Scott Fitts Jerald', 0);
-            String sql = "insert into employees values(default, ?, ? , ?)";
+            String sql = "insert into employees values(0, ?, ? , ?, ?, ?, ?, ?)";
             // The only thing in the sql String that isnt "just a string" are the question marks
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             // We use Return generated Keys, to get back the primary key of our newly created employee
@@ -25,6 +25,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2,employee.getLastName());
             preparedStatement.setString(3,employee.getAddress());
+            preparedStatement.setString(4, employee.getPassword());
+            preparedStatement.setString(5, employee.getEmail());
+            preparedStatement.setBoolean(6, employee.isAdmin());
+            preparedStatement.setString(7, employee.getStatus());
 
             preparedStatement.execute();
 
@@ -53,9 +57,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
 
             Employee employee = new Employee();
             employee.setId(rs.getInt("id"));
-            employee.getFirstName(rs.getString("firstName"));
-            employee.getLastName(rs.getString("lastName"));
-            employee.getAddress(rs.getString("address"));
+            employee.getFirstName();
+            employee.getLastName();
+            employee.getAddress();
 
             return employee;
 
@@ -82,9 +86,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             while(rs.next()){
                 Employee employee = new Employee();
                 employee.setId(rs.getInt("id"));
-                employee.getFirstName(rs.getString("firstName"));
-                employee.getLastName(rs.getString("lastName"));
-                employee.getAddress(rs.getString("address"));
+                employee.getFirstName();
+                employee.getLastName();
+                employee.getAddress();
                 employeeList.add(employee);
             }
             return employeeList;
@@ -99,13 +103,16 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
     @Override
     public Employee updateEmployee(Employee employee) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "Update employees set firstName = ?, lastName = ?, address = ? where id = ?";
+            String sql = "Update employees set firstName = ?, lastName = ?, address = ?, password = ?, email = ?, isAdmin = ?, status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2,employee.getLastName());
             preparedStatement.setString(3,employee.getAddress());
-            preparedStatement.setInt(4,employee.getId());
+            preparedStatement.setString(4, employee.getPassword());
+            preparedStatement.setString(5, employee.getEmail());
+            preparedStatement.setBoolean(6, employee.isAdmin());
+            preparedStatement.setString(7, employee.getStatus());
 
             preparedStatement.executeUpdate();
             return employee;

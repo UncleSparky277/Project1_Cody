@@ -9,12 +9,26 @@ public class Employee {
     private String lastName;
     private String address;
     private String password;
-    private String username;
+    private String email;
     private boolean isAdmin;
-    private Status status;
+    private String status;
 
-public Employee() {
-}
+
+
+
+    public Employee() {
+    }
+
+    public Employee(int id, String firstName, String lastName, String address, String password, String email, boolean isAdmin, String status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.password = password;
+        this.email = email;
+        this.isAdmin = isAdmin;
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -24,22 +38,16 @@ public Employee() {
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", isAdmin=" + isAdmin +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id && isAdmin == employee.isAdmin && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(address, employee.address) && Objects.equals(password, employee.password) && Objects.equals(username, employee.username);
-    }
+
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, password, username, isAdmin);
+        return Objects.hash(id, firstName, lastName, address, password, email, isAdmin);
     }
 
     public int getId() {
@@ -82,12 +90,12 @@ public Employee() {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isAdmin() {
@@ -96,5 +104,21 @@ public Employee() {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && isAdmin == employee.isAdmin && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(address, employee.address) && Objects.equals(password, employee.password) && Objects.equals(email, employee.email);
     }
 }

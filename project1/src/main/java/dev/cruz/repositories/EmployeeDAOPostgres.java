@@ -6,6 +6,7 @@ import dev.cruz.util.ConnectionFactory;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeeDAOPostgres implements EmployeeDAO{
 
@@ -17,7 +18,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             // Here is the unfun thing about JDBC, you have to write SQL statements in Java
             // I recommend putting in comments the SQL command you are trying to execute
             //INSERT INTO employees VALUES (DEFAULT, 'Great Gatsby', 'F. Scott Fitts Jerald', 0);
-            String sql = "insert into employees values(0, ?, ? , ?, ?, ?, ?, ?)";
+            String sql = "insert into employees (firstname, lastname, address, \"password\", email, isadmin, status) values( ?, ? , ?, ?, ?, ?, ?)";
             // The only thing in the sql String that isnt "just a string" are the question marks
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             // We use Return generated Keys, to get back the primary key of our newly created employee
@@ -49,7 +50,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
         try(Connection connection = ConnectionFactory.getConnection()){
             String sql = "select * from employees where id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            // The class PreparedStatement has a method called prepareStatement (no d) that takes in a string
+
             ps.setInt(1,id);
 
             ResultSet rs = ps.executeQuery();
@@ -60,6 +61,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             employee.getFirstName();
             employee.getLastName();
             employee.getAddress();
+            employee.getPassword();
+            employee.getEmail();
+            employee.isAdmin();
+            employee.getStatus();
 
             return employee;
 
@@ -89,6 +94,10 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
                 employee.getFirstName();
                 employee.getLastName();
                 employee.getAddress();
+                employee.getPassword();
+                employee.getEmail();
+                employee.isAdmin();
+                employee.getStatus();
                 employeeList.add(employee);
             }
             return employeeList;
@@ -113,6 +122,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             preparedStatement.setString(5, employee.getEmail());
             preparedStatement.setBoolean(6, employee.isAdmin());
             preparedStatement.setString(7, employee.getStatus());
+            preparedStatement.setInt(8, employee.getId());
 
             preparedStatement.executeUpdate();
             return employee;
@@ -141,4 +151,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             return false;
         }
     }
+
+
+
 }

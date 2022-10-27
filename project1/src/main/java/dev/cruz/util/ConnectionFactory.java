@@ -16,3 +16,4 @@ public class ConnectionFactory {
         }
     }
 }
+//jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password&currentSchema=project1

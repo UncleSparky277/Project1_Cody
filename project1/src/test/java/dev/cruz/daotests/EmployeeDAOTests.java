@@ -16,7 +16,7 @@ public class EmployeeDAOTests {
     @Test
     @Order(1)
     void create_employee_test(){
-        Employee newEmployee = new Employee(0,"firstName","lastName", "123 address st", "password", "user", false, Status.APPROVED);
+        Employee newEmployee = new Employee(0,"firstName","lastName", "123 address st", "password", "user", false, "APPROVED");
         Employee savedEmployee = employeeDAO.createEmployee(newEmployee);
         Assertions.assertNotEquals(0,savedEmployee.getId());
     }
@@ -32,7 +32,7 @@ public class EmployeeDAOTests {
         //When testing update, you should either get the employee and use its values or create a completely new employee and use those values
         Employee employee = employeeDAO.getEmployeeById(1);
         //You can think of update more of a full replacement/swap and less of specific values being update
-        Employee employeeV2 = new Employee(employee.getId(),employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPassword(), employee.getUsername(), employee.isAdmin(), employee.getStatus());
+        Employee employeeV2 = new Employee(employee.getId(),employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPassword(), employee.getEmail(), employee.isAdmin(), employee.getStatus());
         employeeDAO.updateEmployee(employeeV2);
         Employee updatedEmployee = employeeDAO.getEmployeeById(employeeV2.getId());
         Assertions.assertEquals("lastName",updatedEmployee.getLastName());

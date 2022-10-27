@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        //Lets write business rules to validate our code (Buisness Logic)
+        //Lets write business rules to validate our code (Business Logic)
         if(employee.getFirstName().length() == 0){
             throw new RuntimeException("Employee's title cannot be empty");
         }

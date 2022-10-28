@@ -30,9 +30,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee createEmployee(Employee employee) {
         //Lets write business rules to validate our code (Business Logic)
        Employee creationTest= employeeDAO.getEmployeeByEmail(employee.getEmail());
-        if (creationTest != null){
-            throw new RuntimeException("Duplicate email");
-        }
+       // if (creationTest != null){
+         //   throw new RuntimeException("Duplicate email");
+       // }
         if(employee.getFirstName().length() == 0){
             throw new InvalidFirstNameException("Employee's first name cannot be empty");
         }

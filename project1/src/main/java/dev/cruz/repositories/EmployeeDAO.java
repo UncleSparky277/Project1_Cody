@@ -18,4 +18,5 @@ public interface EmployeeDAO {
 
     //delete
     boolean deleteEmployeeById(int id);
+    Employee getEmployeeByEmail(String email);
 }

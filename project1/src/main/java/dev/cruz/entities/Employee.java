@@ -30,25 +30,6 @@ public class Employee {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", isAdmin=" + isAdmin +
-                '}';
-    }
-
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, password, email, isAdmin);
-    }
 
     public int getId() {
         return id;
@@ -115,10 +96,16 @@ public class Employee {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee employee = (Employee) o;
-        return id == employee.id && isAdmin == employee.isAdmin && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && Objects.equals(address, employee.address) && Objects.equals(password, employee.password) && Objects.equals(email, employee.email);
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

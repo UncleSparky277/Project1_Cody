@@ -13,7 +13,7 @@ public class TicketDAOLocal implements TicketDAO{
 
 
     @Override
-    public Ticket createTicket(Ticket ticket) {
+    public Ticket createTicket(Ticket ticket, int id) {
         ticket.setId(idCount);
         idCount++;
         ticketTable.put(ticket.getId(),ticket);
@@ -22,12 +22,22 @@ public class TicketDAOLocal implements TicketDAO{
     }
 
     @Override
-    public Ticket getTicketById(int id) {
-        return ticketTable.get(id);
+    public List<Ticket> getTicketById(int id) {
+        return null;
+    }
+
+    @Override
+    public Ticket getTicketById1(int id) {
+        return null;
     }
 
     @Override
     public List<Ticket> getAllTickets() {
+        return null;
+    }
+
+    @Override
+    public List<Ticket> getPendingTickets() {
         return null;
     }
 

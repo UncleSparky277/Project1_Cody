@@ -6,7 +6,6 @@ import dev.cruz.util.ConnectionFactory;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class EmployeeDAOPostgres implements EmployeeDAO{
 
@@ -58,16 +57,50 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
 
             Employee employee = new Employee();
             employee.setId(rs.getInt("id"));
-            employee.getFirstName();
-            employee.getLastName();
-            employee.getAddress();
-            employee.getPassword();
-            employee.getEmail();
-            employee.isAdmin();
-            employee.getStatus();
+            employee.setFirstName(rs.getString("firstName"));
+            employee.setLastName(rs.getString("lastName"));
+            employee.setAddress(rs.getString("address"));
+            employee.setEmail(rs.getString("email"));
+            employee.setAdmin(rs.getBoolean("isAdmin"));
+            employee.setStatus(rs.getString("status"));
 
             return employee;
 
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+
+
+    }
+
+    @Override
+    public Employee getEmployeeByEmail(String email) {
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "select * from employees where email = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+
+            ps.setString(1,email);
+
+            ResultSet rs = ps.executeQuery();
+
+
+            Employee employee = new Employee();
+            while(rs.next()) {
+                employee.setId(rs.getInt("id"));
+                employee.setFirstName(rs.getString("firstName"));
+                employee.setLastName(rs.getString("lastName"));
+                employee.setAddress(rs.getString("address"));
+                employee.setPassword(rs.getString("password"));
+                employee.setEmail(rs.getString("email"));
+                employee.setAdmin(rs.getBoolean("isAdmin"));
+                employee.setStatus(rs.getString("status"));
+
+
+            }
+            return employee;
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -86,18 +119,17 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            List<Employee> employeeList = new ArrayList();
+            List<Employee> employeeList = new ArrayList<>();
 
             while(rs.next()){
                 Employee employee = new Employee();
                 employee.setId(rs.getInt("id"));
-                employee.getFirstName();
-                employee.getLastName();
-                employee.getAddress();
-                employee.getPassword();
-                employee.getEmail();
-                employee.isAdmin();
-                employee.getStatus();
+                employee.setFirstName(rs.getString("firstName"));
+                employee.setLastName(rs.getString("lastName"));
+                employee.setAddress(rs.getString("address"));
+                employee.setEmail(rs.getString("email"));
+                employee.setAdmin(rs.getBoolean("isAdmin"));
+                employee.setStatus(rs.getString("status"));
                 employeeList.add(employee);
             }
             return employeeList;

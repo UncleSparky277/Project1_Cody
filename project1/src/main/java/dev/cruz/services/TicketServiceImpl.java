@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TicketServiceImpl implements TicketService {
 
-    private TicketDAO ticketDAO;
+    private final TicketDAO ticketDAO;
 
     public TicketServiceImpl(TicketDAO ticketDAO){
         this.ticketDAO = ticketDAO;
@@ -16,7 +16,7 @@ public class TicketServiceImpl implements TicketService {
 
 
     @Override
-    public Ticket createTicket(Ticket ticket) {
+    public Ticket createTicket(Ticket ticket, int id) {
 
         if(ticket.getName().length() == 0){
             throw new RuntimeException("Ticket's name cannot be empty");
@@ -24,24 +24,33 @@ public class TicketServiceImpl implements TicketService {
         if(ticket.getDescription().length() == 0){
             throw new InvalidAdminException("Ticket's description cannot be empty");
         }
-        if(ticket.getAmount().length() == 0){
-            throw new InvalidAdminException("Ticket's amount cannot be empty");
+        if(ticket.getAmount() <= 0){
+            throw new InvalidAdminException("Ticket's amount cannot be 0 or negative");
         }
-        Ticket savedTicket = this.ticketDAO.createTicket(ticket);
-        return savedTicket;
+        return ticketDAO.createTicket(ticket, id);
     }
 
     @Override
-    public Ticket getTicketById(int id) {
+    public List<Ticket> getTicketById(int id) {
 
-        Ticket ticket = this.ticketDAO.getTicketById(id);
-        return ticket;
+        return ticketDAO.getTicketById(id);
 
     }
 
+    @Override
+    public Ticket getTicketById1(int id) {
+
+        return ticketDAO.getTicketById1(id);
+
+    }
+
+    @Override
     public List<Ticket> getAllTickets() {
-        return this.ticketDAO.getAllTickets();
+        return ticketDAO.getAllTickets();
     }
+
+    @Override
+    public List<Ticket> getPendingTickets() { return ticketDAO.getPendingTickets(); }
 
     @Override
     public Ticket updateTicket(Ticket ticket) {
@@ -51,15 +60,15 @@ public class TicketServiceImpl implements TicketService {
         if(ticket.getDescription().length() == 0){
             throw new RuntimeException("Ticket's description cannot be empty");
         }
-        if(ticket.getAmount().length() == 0){
-            throw new RuntimeException("Ticket's amount cannot be empty");
+        if(ticket.getAmount() <= 0){
+            throw new RuntimeException("Ticket's amount cannot be 0 or negative");
         }
-        return this.ticketDAO.updateTicket(ticket);
+        return ticketDAO.updateTicket(ticket);
     }
 
     @Override
     public boolean deleteTicketById(int id) {
-        return this.ticketDAO.deleteTicketById(id);
+        return ticketDAO.deleteTicketById(id);
     }
 
 }

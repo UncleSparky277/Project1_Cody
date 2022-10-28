@@ -6,19 +6,23 @@ public class Ticket {
 
     private int id;
     private String name;
-    private String amount;
+    private int amount;
     private String description;
     private String status;
+
+
+    private int employeeId;
 
 
     public Ticket() {
     }
 
-    public Ticket(String name, String amount, String description, String status) {
+    public Ticket(String name, int amount, String description, String status, int employeeId) {
         this.name = name;
         this.amount = amount;
         this.description = description;
         this.status = status;
+        this.employeeId = employeeId;
     }
 
     public int getId() {
@@ -37,11 +41,11 @@ public class Ticket {
         this.name = name;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -61,16 +65,24 @@ public class Ticket {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Ticket)) return false;
-        Ticket ticket = (Ticket) o;
-        return id == ticket.id && Objects.equals(name, ticket.name) && Objects.equals(amount, ticket.amount) && Objects.equals(description, ticket.description) && Objects.equals(status, ticket.status);
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, name, amount, description, status);
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", amount='" + amount + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", employeeId=" + employeeId +
+                '}';
     }
+
 }

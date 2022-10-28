@@ -47,4 +47,9 @@ public class EmployeeDAOLocal implements EmployeeDAO{
             return true;
         }
     }
+
+    @Override
+    public Employee getEmployeeByEmail(String email) {
+        return null;
+    }
 }

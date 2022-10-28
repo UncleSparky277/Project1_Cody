@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface TicketService {
     //create
-    Ticket createTicket(Ticket ticket);
+    Ticket createTicket(Ticket ticket, int id);
 
     //read
-    Ticket getTicketById(int id);
+    List<Ticket> getTicketById(int id);
+    Ticket getTicketById1(int id);
     List<Ticket> getAllTickets();
+    List<Ticket> getPendingTickets();
 
     //update
     Ticket updateTicket(Ticket ticket);
